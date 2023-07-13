@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RM.DJ Minang Raya</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <script src="https://kit.fontawesome.com/1a5cf7fd8d.js" crossorigin="anonymous"></script>
+
+  <!-- CSS Eksternal -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navbar start -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-logo">RM.<span>DJ MR</span></a>
+
+    <div class="navbar-nav">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="kontak.html">Kontak</a>
+      <a href="about.html">Tentang Kami</a>
+    </div>
+
+    <div class="navbar-extra">
+      <a href="#" id="list-menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+    </div>
+  </nav>
+  <!-- Navbar end -->
+
+  <!-- Hero start -->
+  <div class="hero">
+    <div class="hero-text">
+      <h1 style="font-size: 50px">Menu</h1>
+    </div>
+  </div>
+  <!-- Hero end -->
+
+  <!-- Products Section start -->
+  <section class="products">
+    <div class="row" id="product-row">
+      <!-- Menu items will be dynamically inserted here -->
+    </div>
+  </section>
+  <!-- Products Section end -->
+
+  <!-- Footer start -->
+  <footer>
+    <div class="socials">
+      <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
+      <a href="#"><i class="fa-brands fa-twitter fa-lg"></i></a>
+      <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
+    </div>
+
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="kontak.html">Kontak</a>
+      <a href="about.html">Tentang Kami</a>
+    </div>
+
+    <div class="credit">
+      <p>Created by <a href="">RM. DJ Minang Raya</a>. | &copy; 2023.</p>
+    </div>
+  </footer>
+  <!-- Footer end -->
+
+  <!-- JavaScript section -->
+  <script>
+    // Declare a variable for menu data
+    let data = [];
+
+    // Fetch menu data from the backend and populate the menu items
+    fetch('get_menu.php')
+      .then(response => response.json())
+      .then(menuData => {
+        data = menuData; // Assign the fetched menu data to the 'data' variable
+
+        const productRow = document.getElementById('product-row');
+        let menuItems = '';
+
+        data.forEach(item => {
+          const menuItem = `
+            <div class="product-card">
+              <div class="product-image">
+                <img src="${item.gambar}" alt="${item.nama}" />
+              </div>
+              <div class="product-content">
+                <h3>${item.nama}</h3>
+                <div class="product-price" style="font-weight: 300">Rp. ${item.harga}</div>
+                <button class="add-to-cart-btn" onclick="addToCart(${item.id})">Tambahkan ke Keranjang</button>
+              </div>
+            </div>
+          `;
+          menuItems += menuItem;
+        });
+
+        productRow.innerHTML = menuItems;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+    // Add item to cart
+    function addToCart(itemId) {
+      // Find the menu item in the data array based on the item ID
+      const selectedItem = data.find(item => item.id === itemId);
+
+      // Get the existing cart items from localStorage
+      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+      // Add the selected item to the cartItems array
+      cartItems.push(selectedItem);
+
+      // Store the updated cart items in localStorage
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+      // Redirect to the shopping cart page
+      window.location.href = 'keranjang.html';
+    }
+  </script>
+</body>
+</html>

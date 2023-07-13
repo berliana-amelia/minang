@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RM. DJ Minang Raya</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/1a5cf7fd8d.js"
+      crossorigin="anonymous"
+    ></script>
+    
+    <!-- Javascript internal, berada dalam tag head -->
+    <script>
+      function scrollToTop() {
+        window.scrollTo(0, 0);
+      }
+    </script>
+
+    <!-- CSS Eksternal -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- Navbar start -->
+    <nav class="navbar">
+      <a href="index.html" class="navbar-logo">RM.<span>DJ MR</span></a>
+
+      <div class="navbar-nav">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="about.html">Tentang Kami</a>
+      </div>
+
+      <div class="navbar-extra">
+        <a href="#" id="list-menu"
+          ><i class="fa-solid fa-bars fa-lg"></i
+        ></a>
+      </div>
+    </nav>
+    <!-- Navbar end -->
+
+    <!-- Hero Start -->
+    <div class="hero">
+      <div class="hero-text">
+        <h1 style="font-size: 50px">Kontak Kami</h1>
+      </div>
+    </div>
+    <!-- style="font-size:50px termasuk inline css -->
+    <!-- Hero end -->
+
+    <!-- Contact Section start -->
+    <section class="contact">
+      <h2><span>Alamat</span> Kami</h2>
+      <div class="row">
+        <p>
+          Jl. Raya Kemiri No.128, Kemiri, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61234
+        </p>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Hari</th>
+              <th>Jam Buka</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Senin - Jum'at</td>
+              <td>06.00 - 23.00</td>
+            </tr>
+            <tr>
+              <td>Sabtu - Minggu</td>
+              <td>24 Jam</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.2191403985007!2d112.72853357438078!3d-7.440988873316664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e71a4b983307%3A0xe7c2b085ab66894b!2sMASAKAN%20PADANG%20DJ%20MINANG%20RAYA%20SIDOARJO!5e0!3m2!1sid!2sid!4v1685959911947!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+
+        <form action="">
+          <div class="input-group">
+            <i class="fa-solid fa-user"></i>
+            <!-- <i class="fa-solid fa-user"></i> termasuk penggunakan icon fontawesome -->
+            <input style="color: black;" type="text" placeholder="nama" />
+          </div>
+          <div class="input-group">
+            <i class="fa-solid fa-envelope"></i>
+            <input style="color: black;"  type="text" placeholder="email" />
+          </div>
+          <div class="input-group">
+            <i class="fa-solid fa-phone"></i>
+            <input style="color: black;" type="text" placeholder="no hp" />
+          </div>
+          <button type="submit" class="btn">kirim pesan</button>
+        </form>
+      </div>
+    </section>
+    <!-- Contact Section end -->
+
+    <!-- Footer start -->
+    <footer>
+      <div class="socials">
+        <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter fa-lg"></i></a>
+        <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
+      </div>
+
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="about.html">Tentang Kami</a>
+      </div>
+
+      <div class="credit">
+        <p>Created by <a href="">RM. DJ Minang Raya</a>. | &copy; 2023.</p>
+      </div>
+    </footer>
+    <!-- Footer end -->
+
+    <!-- tombol scroll to top -->
+    <a class="btn-scroll" onClick="scrollToTop()"
+      ><i class="fa-solid fa-arrow-up fa-2xl"></i
+    ></a>
+  </body>
+      <!-- Ini Javascript External -->
+      <script src="js/script.js"></script>
+
+</html>
