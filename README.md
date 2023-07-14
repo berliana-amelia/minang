@@ -2,7 +2,7 @@
 
 Kelompok : 
 1. Berliana Amelia A.Z.
-2. Desan Tanzilda W.D.
+2. Densa Tanzilda W.D.
 3. Faisal H.
 4. Andro Widi H.
 
