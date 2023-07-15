@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,8 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+    rel="stylesheet">
 
   <!-- FontAwesome Icons -->
   <script src="https://kit.fontawesome.com/1a5cf7fd8d.js" crossorigin="anonymous"></script>
@@ -28,7 +30,7 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
-    }
+    } 
 
     h1 {
       font-size: 32px;
@@ -71,6 +73,7 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Navbar start -->
   <nav class="navbar">
@@ -119,41 +122,80 @@
   </footer>
   <!-- Footer end -->
 
-  <!-- JavaScript section -->
-  <script>
-    // Retrieve cart items from localStorage
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-    // Count the quantity of each menu item in the cart
-    const cartItemQuantities = {};
-    cartItems.forEach(item => {
-      if (cartItemQuantities[item.id]) {
-        cartItemQuantities[item.id]++;
-      } else {
-        cartItemQuantities[item.id] = 1;
+  
+    <!-- JavaScript section -->
+    <script>
+      // Retrieve cart items from localStorage
+      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  
+      // Combine cart items with the same ID and calculate their quantities
+      const cartItemsCombined = [];
+      const cartItemQuantities = {};
+      cartItems.forEach(item => {
+        if (cartItemQuantities[item.id]) {
+          cartItemQuantities[item.id]++;
+        } else {
+          cartItemQuantities[item.id] = 1;
+          cartItemsCombined.push(item);
+        }
+      });
+  
+      document.addEventListener("DOMContentLoaded", function() {
+      // Handle button clicks for quantity update
+      function handleQuantityUpdate(event) {
+        const target = event.target;
+        if (target.classList.contains('btn-quantity')) {
+          const itemId = target.getAttribute('data-id');
+          const action = target.getAttribute('data-action');
+          const itemQuantityElement = target.parentNode.querySelector('.item-quantity');
+  
+          const index = cartItems.findIndex(item => item.id === itemId);
+          if (index !== -1) {
+            if (action === 'increase') {
+              cartItems[index].quantity++;
+            } else if (action === 'decrease') {
+              if (cartItems[index].quantity > 1) {
+                cartItems[index].quantity--;
+              }
+            }
+  
+            itemQuantityElement.textContent = cartItems[index].quantity;
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+          }
+        }
       }
+  
+      const cartItemsContainer = document.getElementById('cart-items');
+      cartItemsContainer.addEventListener('click', handleQuantityUpdate);
     });
-
-    // Display cart items on the cart page
-    const cartItemsContainer = document.getElementById('cart-items');
-    let cartItemsHtml = '';
-
-    cartItems.forEach(item => {
-      const quantity = cartItemQuantities[item.id];
-
-      cartItemsHtml += `
-        <div class="cart-item">
-          <img class="cart-item-image" src="${item.gambar}" alt="${item.nama}" />
-          <div class="cart-item-details">
-            <h3 class="cart-item-name">${item.nama}</h3>
-            <div class="cart-item-price">Rp. ${item.harga}</div>
-            <div class="cart-item-quantity">Jumlah: ${quantity}</div>
+  
+      // Display cart items on the cart page
+      const cartItemsContainer = document.getElementById('cart-items');
+      let cartItemsHtml = '';
+  
+      cartItemsCombined.forEach(item => {
+        const quantity = cartItemQuantities[item.id];
+  
+        cartItemsHtml += `
+          <div class="cart-item">
+            <img class="cart-item-image" src="${item.gambar}" alt="${item.nama}" />
+            <div class="cart-item-details">
+              <h3 class="cart-item-name">${item.nama}</h3>
+              <div class="cart-item-price">Rp. ${item.harga}</div>
+              <div class="cart-item-quantity">
+                <button class="btn-quantity" data-id="${item.id}" data-action="decrease">-</button>
+                <span class="item-quantity">${quantity}</span>
+                <button class="btn-quantity" data-id="${item.id}" data-action="increase">+</button>
+              </div>
+            </div>
           </div>
-        </div>
-      `;
-    });
-
-    cartItemsContainer.innerHTML = cartItemsHtml;
-  </script>
+        `;
+      });
+  
+      cartItemsContainer.innerHTML = cartItemsHtml;
+      cartItemsContainer.addEventListener('click', handleQuantityUpdate);
+    </script>
+  
 </body>
+
 </html>
